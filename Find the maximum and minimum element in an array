@@ -1,0 +1,22 @@
+Problem link: https://practice.geeksforgeeks.org/problems/find-minimum-and-maximum-element-in-an-array4428/1/
+
+pair<long long, long long> getMinMax(long long a[], int n) {
+    pair<long long, long long> ans;
+    long long mini,maxi;
+    mini=INT_MAX;
+    maxi=INT_MIN;
+    for(int i=0;i<n;i++)
+    {
+        if(a[i]>maxi)
+        {
+            maxi=a[i];
+        }
+        if(a[i]<mini)
+        {
+            mini=a[i];
+        }
+    }
+    ans.first=mini;
+    ans.second=maxi;
+    return ans;
+}
