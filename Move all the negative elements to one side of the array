@@ -1,0 +1,69 @@
+Problem link - https://practice.geeksforgeeks.org/problems/cyclically-rotate-an-array-by-one2614/1
+
+--Without extra space (relative order will not be same)
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int> v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    int i=-1,j=0,pivot=0;
+    while(j<n)
+    {
+        if(v[j]>pivot)
+        {
+            i++;
+            swap(v[i],v[j]);
+        }
+        j++;
+    }
+    for(int i=0;i<n;i++)
+    {
+        cout<<v[i]<<" ";
+    }
+}
+
+
+
+-- to keep relative order same (use extra space)
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int> v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    vector<int> temp(n);
+    int j=0;
+    for(int i=0;i<n;i++)
+    {
+        if(v[i]>0)
+        {
+            temp[j++]=v[i];
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        if(v[i]<0)
+        {
+            temp[j++]=v[i];
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        cout<<temp[i]<<" ";
+    }
+}
