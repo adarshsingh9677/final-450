@@ -1,0 +1,30 @@
+Problem link: https://leetcode.com/problems/sort-colors/
+
+
+class Solution {
+public:
+    void sortColors(vector<int>& v) {
+        int low,mid,high;
+        low=mid=0;
+        high=v.size()-1;
+        while(mid<=high)
+        {
+            if(v[mid]==0)
+            {
+                swap(v[mid],v[low]);
+                mid++;
+                low++;
+            }
+            else if(v[mid]==1)
+            {
+                mid++;
+            }
+            else
+            {
+                swap(v[mid],v[high]);
+                high--;
+            }
+        }
+        
+    }
+};
