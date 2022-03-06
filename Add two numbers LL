@@ -1,0 +1,67 @@
+Problem link: https://leetcode.com/problems/add-two-numbers/
+
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        stack<ListNode*>s1,s2;
+        ListNode* ans=NULL,*fans = NULL;
+        ListNode* p1=l1,*p2=l2;
+        
+        int carry=0;
+        while(p1!=NULL && p2!=NULL)
+        {
+            int sum = carry + p1->val + p2->val;
+            int fsum = sum%10;
+            carry = sum/10;
+            
+            if(ans==NULL)
+            {
+                ans= new ListNode(fsum);
+                fans=ans;
+            }
+            else
+            {
+                ans->next= new ListNode(fsum);
+                ans=ans->next;
+            }
+            p1=p1->next;
+            p2=p2->next;
+        }
+        while(p1!=NULL)
+        {
+            int sum = carry + p1->val;
+            int fsum = sum%10;
+            carry = sum/10;
+            ans->next= new ListNode(fsum);
+            ans=ans->next;
+            p1=p1->next;
+            
+        }
+        while(p2!=NULL)
+        {
+            int sum = carry + p2->val;
+            int fsum = sum%10;
+            carry = sum/10;
+            ans->next= new ListNode(fsum);
+            ans=ans->next;
+            p2=p2->next;
+        }
+        if(carry==1)
+        {
+            ans->next= new ListNode(carry);
+        }
+        return fans;
+    }
+};
