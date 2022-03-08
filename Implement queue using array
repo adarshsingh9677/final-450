@@ -1,0 +1,38 @@
+Problem link: https://www.codingninjas.com/codestudio/problems/2099908?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=1
+
+
+class Queue {
+public:
+    int qu[10000];
+    int frnt,rear,cnt=0;
+    Queue() {
+        frnt=0;
+        rear=0;
+    }
+
+    /*----------------- Public Functions of Queue -----------------*/
+
+    bool isEmpty() {
+        if(frnt==rear)
+            return true;
+        return false;
+    }
+
+    void enqueue(int data) {
+        qu[(rear++)%10000]=data;
+    }
+
+    int dequeue() {
+        if(frnt !=rear)
+        {
+            return qu[(frnt++)%10000];
+        }
+        return -1;
+    }
+
+    int front() {
+        if(frnt==rear)
+            return -1;
+        return qu[(frnt)%10000];
+    }
+};
