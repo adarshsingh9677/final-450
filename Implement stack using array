@@ -1,0 +1,47 @@
+Problem link: https://www.codingninjas.com/codestudio/problems/stack-implementation-using-array_3210209?topList=striver-sde-sheet-problems&leftPanelTab=0
+
+
+
+// Stack class.
+class Stack {
+    
+public:
+    int top_stack,n;
+    int arr[10000];
+    Stack(int capacity) {
+        top_stack=-1;
+        n=capacity;
+    }
+
+    void push(int num) {
+        if(top_stack!=n-1)
+            arr[++top_stack]=num;
+    }
+
+    int pop() {
+        if(top_stack!=-1)
+        {
+            return arr[top_stack--];
+        }
+    }
+    
+    int top() {
+        if(top_stack!=-1)
+        {
+            return arr[top_stack];
+        }
+    }
+    
+    int isEmpty() {
+        if(top_stack==-1)
+            return 1;
+        return 0;
+    }
+    
+    int isFull() {
+        if(top_stack>=n-1)
+            return 1;
+        return 0;
+    }
+    
+};
