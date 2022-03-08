@@ -1,0 +1,42 @@
+Problem link:  https://practice.geeksforgeeks.org/problems/flattening-a-linked-list/1
+
+
+Node *merge(Node* l1, Node *l2)
+{
+    if(l1==NULL)
+        return l2;
+    if(l2==NULL)
+        return l1;
+    if(l1->data>l2->data)
+    {
+        Node* tempswap=l1;
+        l1=l2;
+        l2=tempswap;
+    }
+    Node*res=l1;
+    Node*temp;
+    while(l1!=NULL && l2!=NULL)
+    {
+        
+        while(l1!=NULL && l1->data<=l2->data)
+        {
+            temp=l1;
+            l1=l1->bottom;
+        }
+        temp->bottom=l2;
+        Node* tempswap=l1;
+        l1=l2;
+        l2=tempswap; 
+    }
+    
+    return res;
+}
+Node *flatten(Node *root)
+{
+    if(root->next==NULL)
+    {
+        return root;
+    }
+    Node *toflatten = flatten(root->next);
+    return merge(toflatten,root);
+}
