@@ -1,0 +1,40 @@
+Problem link:  https://leetcode.com/problems/online-stock-span/
+
+
+
+class StockSpanner {
+public:
+    
+    vector<int> store;
+    stack<int> st;
+    int day;
+    StockSpanner() {
+        day=1;
+    }
+    
+    int next(int price) {
+        store.push_back(price);
+        int ans;
+        while(!st.empty() && price>=store[st.top()-1])
+        {
+            st.pop();
+        }
+        if(st.empty())
+        {
+            ans= day;
+        }
+        else
+        {
+            ans= day-st.top();
+        }
+        st.push(day);
+        day++;
+        return ans;
+    }
+};
+
+/**
+ * Your StockSpanner object will be instantiated and called as such:
+ * StockSpanner* obj = new StockSpanner();
+ * int param_1 = obj->next(price);
+ */
