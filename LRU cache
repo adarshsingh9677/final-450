@@ -1,0 +1,90 @@
+Problem link:  https://leetcode.com/problems/lru-cache/
+
+
+
+class LRUCache {
+public:
+    class Listnode
+    {
+        public:
+        Listnode *prev;
+        int key;
+        int val;
+        Listnode *next;
+        Listnode(int k,int v)
+        {
+            prev=NULL;
+            next=NULL;
+            key=k;
+            val=v;
+        }
+    };
+    int n;
+    unordered_map<int,Listnode*> mmp;
+    Listnode *head;
+    Listnode *tail;
+    LRUCache(int capacity) {
+        n=capacity;
+        head= new Listnode(-1,-1);
+        tail= new Listnode(-1,-1);
+        head->next=tail;
+        tail->prev=head;
+    }
+    
+    void deletenode(Listnode * node)
+    {
+        Listnode* delnext,*delprev;
+        delprev=node->prev;
+        delnext=node->next;
+        delprev->next=delnext;
+        delnext->prev=delprev;
+    }
+    
+    void addafterhead(int key,int value)
+    {
+        Listnode* node=new Listnode(key,value);
+        Listnode*temp=head->next;
+        head->next=node;
+        node->prev=head;
+        node->next=temp;
+        temp->prev=node;
+    }
+    
+    int get(int key) 
+    {
+        if(mmp.size() == 0 || mmp.find(key)==mmp.end())
+        {
+            return -1;
+        }
+        int ans;
+        ans=mmp[key]->val;
+        deletenode(mmp[key]);
+        addafterhead(key,ans);
+        mmp[key]=head->next;
+        return ans;
+    }    
+    
+    void put(int key, int value) 
+    {
+        if(mmp.find(key)!=mmp.end())
+        {
+            deletenode(mmp[key]);
+        }
+        else if(mmp.size()==n)
+        {
+            mmp.erase(tail->prev->key);
+            deletenode(tail->prev);
+        }
+        addafterhead(key,value);
+        mmp[key]=head->next;
+    }
+};
+
+
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
