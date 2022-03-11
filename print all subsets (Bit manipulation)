@@ -1,0 +1,18 @@
+Problem link: https://www.codingninjas.com/codestudio/problems/print-all-subsets_2041995?topList=striver-sde-sheet-problems&leftPanelTab=0
+
+
+
+
+void printAllSubsets(int n, vector<int> &arr){
+ 
+    for(int i=0;i<pow(2,n);i++)
+    {
+        
+        for(int j=0;j<n;j++)
+        {
+            if(i & (1 << j))
+            	cout << arr[j]<<" ";
+        }
+        cout<<endl;
+    }
+}
