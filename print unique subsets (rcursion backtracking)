@@ -1,0 +1,30 @@
+Problem link: https://leetcode.com/problems/subsets-ii/
+
+
+
+class Solution {
+public:
+    
+    void uniquesubsets(vector<int> &nums,vector<int> &temp,vector<vector<int>> &ans,int ind,int n)
+    {
+        ans.push_back(temp);
+        for(int i=ind;i<nums.size();i++)
+        {
+            if(i!=ind && nums[i]==nums[i-1] )
+            {
+                continue;
+            }
+            temp.push_back(nums[i]);
+            uniquesubsets(nums,temp,ans,i+1,n);
+            temp.pop_back();
+            
+        }
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> ans;
+        vector<int> temp;
+        sort(nums.begin(),nums.end());
+        uniquesubsets(nums,temp,ans,0,nums.size());
+        return ans;
+    }
+};
