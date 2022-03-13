@@ -1,0 +1,45 @@
+Problem link: https://leetcode.com/problems/valid-sudoku/
+
+
+class Solution {
+public:
+    
+    bool isvalid(vector<vector<char>>& board, char k,int row,int col)
+    {
+        for(int i=0;i<9;i++)
+        {
+            if(i!=row && board[i][col]==k)
+                return false;
+            if(i!=col && board[row][i]==k)
+                return false;
+        }
+        
+        int rowup,colprev;
+        rowup =(row/3)*3;
+        colprev =(col/3)*3;
+        for(int i=rowup;i<=rowup+2;i++)
+        {
+            for(int j=colprev;j<=colprev+2;j++)
+            {
+                if(i!=row && j!=col && board[i][j]==k)
+                    return false;
+            }
+        }
+        
+        return true;
+    }
+    bool isValidSudoku(vector<vector<char>>& board) {
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                if(board[i][j]!='.')
+                {
+                    if(!isvalid(board,board[i][j],i,j))
+                        return false;
+                }
+            }
+        }
+        return true;
+    }
+};
