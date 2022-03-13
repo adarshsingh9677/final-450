@@ -1,0 +1,65 @@
+Problem link: https://leetcode.com/problems/sudoku-solver/
+
+
+
+class Solution {
+public:
+    bool ispossible(vector<vector<char>>& board, char k, int row, int col)
+    {
+        
+        for(int i=0;i<9;i++)
+        {
+            if(board[i][col]==k)
+                return false;
+            if(board[row][i]==k)
+                return false;
+        }
+        
+        int rowup,colprev;
+        rowup =(row/3)*3;
+        colprev =(col/3)*3;
+        for(int i=rowup;i<=rowup+2;i++)
+        {
+            for(int j=colprev;j<=colprev+2;j++)
+            {
+                if(board[i][j]==k)
+                    return false;
+            }
+        }
+        
+        return true;
+        
+    }
+    
+    bool solve(vector<vector<char>>& board)
+    {
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                if(board[i][j]=='.')
+                {
+                    for(char c='1';c<='9';c++)
+                    {
+                        if(ispossible(board,c,i,j))
+                        {
+                            board[i][j]=c;
+                            if(solve(board)==true)
+                                return true;
+                            else
+                            {
+                                board[i][j]='.';
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    void solveSudoku(vector<vector<char>>& board) {
+        solve(board);
+    }
+};
