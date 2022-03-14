@@ -1,0 +1,45 @@
+Problem link: https://practice.geeksforgeeks.org/problems/m-coloring-problem-1587115620/1#
+
+
+
+bool issafe(int color[],bool graph[101][101],int node,int n,int col)
+{
+    for(int k=0;k<n;k++)
+    {
+        if(k!=node && graph[k][node]==1 && color[k]==col)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+bool solve(int color[],bool graph[101][101],int node, int m, int n)
+{
+    if(node==n)
+    {
+        return true;
+    }
+    for(int i=1;i<=m;i++)
+    {
+        if(issafe(color,graph,node,n,i))
+        {
+            color[node]=i;
+            if(solve(color,graph,node+1,m,n)) 
+                return true;
+            else
+            {
+                color[node]=0;
+            }
+        }
+    }
+    return false;
+}
+bool graphColoring(bool graph[101][101], int m, int V)
+{
+    int color[V]={0};
+    if(solve(color,graph,0,m,V) ==true)
+    {
+        return true;
+    }
+    return false;
+}
