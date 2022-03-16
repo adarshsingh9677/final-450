@@ -1,0 +1,27 @@
+Problem link: https://practice.geeksforgeeks.org/problems/left-view-of-binary-tree/1#
+
+
+
+void solve(Node *root, vector<int> &ans,int lvl, int &maxlvl)
+{
+    if(root==NULL)
+    {
+        return;
+    }
+    if(lvl>maxlvl)
+    {
+        ans.push_back(root->data);
+        maxlvl++;
+    }
+    solve(root->left,ans,lvl+1,maxlvl);
+    solve(root->right,ans,lvl+1,maxlvl);
+}
+vector<int> leftView(Node *root)
+{
+    vector<int> ans;
+    if(root==NULL)
+        return ans;
+    int maxlvl=-1;
+    solve(root,ans,0,maxlvl);
+    return ans;
+}
