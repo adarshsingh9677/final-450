@@ -1,0 +1,79 @@
+Problem link:  https://practice.geeksforgeeks.org/problems/boundary-traversal-of-binary-tree/1
+
+
+
+class Solution {
+public:
+
+    void getleaves(Node* root,vector<int> &ans)
+    {
+        if(root->left==NULL && root->right==NULL)
+        {
+            ans.push_back(root->data);
+            return;
+        }
+        if(root->left)getleaves(root->left,ans);
+        if(root->right)getleaves(root->right,ans);
+    }
+    
+    bool isleaf(Node* root)
+    {
+        if(root->left==NULL && root->right==NULL)
+        {
+            return true;
+        }
+        return false;
+    }
+    vector <int> boundary(Node *root)
+    {
+        vector<int> ans;
+        ans.push_back(root->data);
+        
+        Node* cur=root->left;
+        while(cur)
+        {
+            if(!isleaf(cur))
+            {
+                ans.push_back(cur->data);
+            }
+            if(cur->left)
+            {
+                cur=cur->left;
+            }
+            else
+            {
+                cur=cur->right;
+            }
+        }
+        
+        
+        
+        if(!isleaf(root))
+            getleaves(root,ans);
+        stack<int> rightrev;
+        
+        cur=root->right;
+        while(cur)
+        {
+            if(!isleaf(cur))
+            {
+                rightrev.push(cur->data);
+            }
+            if(cur->right)
+            {
+                cur=cur->right;
+            }
+            else
+            {
+                cur=cur->left;
+            }
+        }
+        while(!rightrev.empty())
+        {
+            ans.push_back(rightrev.top());
+            rightrev.pop();
+        }
+        
+        return ans;
+    }
+};
