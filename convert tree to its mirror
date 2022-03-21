@@ -1,0 +1,21 @@
+Problem link: https://practice.geeksforgeeks.org/problems/mirror-tree/1#problems
+
+
+
+class Solution {
+  public:
+    // Function to convert a binary tree into its mirror tree.
+    void convert(Node* node)
+    {
+        if(node==NULL)
+        {
+            return;
+        }
+        convert(node->left);
+        convert(node->right);
+        swap(node->left,node->right);
+    }
+    void mirror(Node* node) {
+        convert(node);
+    }
+};
