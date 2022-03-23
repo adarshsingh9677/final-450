@@ -1,0 +1,21 @@
+void findceil(Node *root, int k,int &ceilval)
+	{
+	    while(root!=NULL)
+	    {
+	        if(root->data==k)
+	        {
+	            ceilval=root->data;
+	            return;
+	        }
+	        if(k>root->data)
+    	    {
+    	        root=root->right;
+    	    }
+    	    else
+    	    {
+    	        ceilval=root->data;
+    	        root=root->left;
+    	    }
+	    }
+	   
+	}
