@@ -1,0 +1,36 @@
+Problem link: https://practice.geeksforgeeks.org/problems/predecessor-and-successor/1
+
+
+
+void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+{
+    if (root == NULL)  return ;
+    Node* curr=root;
+    while(curr!=NULL)
+    {
+        if(key>=curr->data)
+        {
+            curr=curr->right;
+        }
+        else
+        {
+            suc = curr;
+            curr=curr->left;
+        }
+    }
+    
+    curr = root;
+    while(curr!=NULL)
+    {
+        if(key<=curr->data)
+        {
+            curr=curr->left;
+        }
+        else
+        {
+            pre = curr;
+            curr=curr->right;
+        }
+    }
+
+}
