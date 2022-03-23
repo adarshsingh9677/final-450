@@ -1,0 +1,29 @@
+Problem link: https://practice.geeksforgeeks.org/problems/kth-largest-element-in-bst/1
+
+
+
+class Solution
+{
+    public:
+    void solve(Node* root,int &k,int &ans)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        solve(root->right,k,ans);
+        k--;
+        if(k==0)
+        {
+            ans=root->data;
+            return;
+        }
+        solve(root->left,k,ans);
+    }
+    int kthLargest(Node *root, int k)
+    {
+        int count=0,ans=INT_MIN;
+        solve(root,k,ans);
+        return ans;
+    }
+};
