@@ -1,0 +1,27 @@
+Problem link: https://leetcode.com/problems/two-sum-iv-input-is-a-bst/
+
+
+
+class Solution {
+public:
+    void buildmapandfind(TreeNode* root, unordered_map<int,TreeNode*> &store, int k,bool& istrue)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        buildmapandfind(root->left,store,k,istrue);
+        buildmapandfind(root->right,store,k,istrue);
+        if(store.find(k-root->val)!=store.end())
+        {
+            istrue=true;
+        }
+        store[root->val] = root;
+    }
+    bool findTarget(TreeNode* root, int k) {
+        unordered_map<int,TreeNode*> store;
+        bool istrue=false;
+        buildmapandfind(root,store,k,istrue);
+        return istrue;
+    }
+};
