@@ -1,0 +1,34 @@
+Problem link: https://leetcode.com/problems/binary-search-tree-iterator/
+
+
+class BSTIterator {
+public:
+    stack<TreeNode*> st;
+    BSTIterator(TreeNode* root) {
+        while(root!=NULL)
+        {
+            st.push(root);
+            root=root->left;
+        }
+    }
+    int next() {
+        int ans = st.top()->val;
+        TreeNode*temp = st.top();
+        st.pop();
+        temp=temp->right;
+        while(temp!=NULL)
+        {
+            st.push(temp);
+            temp=temp->left;
+        }
+        return ans;
+    }
+    
+    bool hasNext() {
+        if(st.empty())
+        {
+            return false;
+        }
+        return true;
+    }
+};
