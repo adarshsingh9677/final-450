@@ -1,0 +1,22 @@
+Problem link: https://leetcode.com/problems/unique-paths/
+
+
+
+class Solution {
+public:
+    
+    int uniquePaths(int m, int n) {
+        if(min(m,n)==1)
+        {
+            return 1;
+        }
+        double ans=1;
+        int up=m+n-2;
+        int down=min(m,n)-1;
+        for(int i=1;i<=down;i++)
+        {
+            ans=ans*(up-down+i)/i;
+        }
+        return int(ans);
+    }
+};
