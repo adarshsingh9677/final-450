@@ -1,0 +1,25 @@
+Problem link: https://practice.geeksforgeeks.org/problems/minimum-platforms-1587115620/1#
+
+
+
+int findPlatform(int arr[], int dep[], int n)
+    {
+    	sort(arr,arr+n);
+    	sort(dep,dep+n);
+    	int i=1,j=0;
+    	int count=1,pf=1;
+    	while(i<n)
+    	{
+    	    if(arr[i]<=dep[j])
+    	    {
+    	        pf=max(pf,++count);
+    	        i++;
+    	    }
+    	    else
+    	    {
+    	        count--;
+    	        j++;
+    	    }
+    	}
+    	return pf;
+    }
