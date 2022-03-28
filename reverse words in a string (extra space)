@@ -1,0 +1,25 @@
+Problem link: https://leetcode.com/problems/reverse-words-in-a-string/
+
+
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        int n=s.size();
+        stack<string> st;
+        stringstream token(s);
+        string word;
+        while(token>>word)
+        {
+            st.push(word);
+        }
+        string ans;
+        while(st.size()>1)
+        {
+            ans+=st.top()+" ";
+            st.pop();
+        }
+        ans+=st.top();
+        return ans;
+    }
+};
