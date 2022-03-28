@@ -1,0 +1,44 @@
+Problem link: https://leetcode.com/problems/search-a-2d-matrix/
+
+
+
+class Solution {
+public:
+   
+    void checkifexists(vector<vector<int>>& matrix, int target,bool &isfound,int n, int m)
+    {
+        int l,h;
+        l = 0;
+        h = (n*m)-1;
+        int row,col;
+        while(l<=h)
+        {
+            int mid = l + (h - l) / 2;
+            row = mid/m;
+            col = mid%m;
+            
+            //cout<<l<<" "<<m<<" "<<h<<endl;;
+            if(matrix[row][col]==target)
+            {
+                isfound=true;
+                return;
+            }
+            if(target<matrix[row][col])
+            {
+                h=mid-1;
+            }
+            else
+            {
+                l=mid+1;
+            }
+        }
+    }
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int n = matrix.size();
+        int m = matrix[0].size();
+        bool isfound=false;
+        checkifexists(matrix,target,isfound,n,m);
+            
+        return isfound;
+    }
+};
