@@ -1,0 +1,15 @@
+Problem link: https://practice.geeksforgeeks.org/problems/longest-common-substring1452/1
+
+
+int lcsubstring(string &s1, string &s2, int m, int n,int res)
+{
+    if(m<0 || n<0)
+    {
+        return res;
+    }
+    if(s1[m]==s2[n])
+    {
+        res = lcsubstring(s1,s2,m-1,n-1,res+1);
+    }
+    return  max(res,max(lcsubstring(s1,s2,m-1,n,0), lcsubstring(s1,s2,m,n-1,0)));
+}
