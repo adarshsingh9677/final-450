@@ -1,0 +1,57 @@
+Problme link: https://leetcode.com/problems/longest-palindromic-substring/
+
+
+
+class Solution {
+public:
+    void countSubstrings(string &s, int &x,int &y) {
+        int n=s.size(),ans=0;
+        vector<vector<bool>>dp(n,vector<bool> (n));
+        for(int d=0;d<n;d++)
+        {
+            for(int i=0,j=d;j<n;i++,j++)
+            {
+                if(i==j)
+                {
+                    dp[i][j]=true;
+                }
+                else if(j-i==1)
+                {
+                    if(s[i]==s[j])
+                    {
+                        dp[i][j]=true;
+                    }
+                    else
+                    {
+                        dp[i][j]=false;
+                    }
+                }
+                else
+                {
+                    if(s[i]==s[j] && dp[i+1][j-1]==true)
+                    {
+                        dp[i][j]=true;
+                    }
+                    else
+                    {
+                        dp[i][j]=false;
+                    }
+                }
+                if(dp[i][j]==true)
+                {
+                    ans++;
+                    x=i;
+                    y=j;
+                }
+            }
+        }
+    }
+    string longestPalindrome(string s) {
+        int x=0,y=0;
+        countSubstrings(s,x,y);
+        string ans="";
+        cout<<x<<" "<<y<<endl;
+        ans = s.substr(x,y-x+1);
+        return ans;
+    }
+};
