@@ -1,0 +1,30 @@
+Problem link: https://leetcode.com/problems/roman-to-integer/
+
+
+class Solution {
+public:
+    int romanToInt(string s) {
+        unordered_map<char,int> store;
+        int n=s.size();
+        store['I']=1;
+        store['V']=5;
+        store['X']=10;
+        store['L']=50;
+        store['C']=100;
+        store['D']=500;
+        store['M']=1000;
+        int ans=store[s[n-1]];
+        for(int i=n-2;i>=0;i--)
+        {
+            if(store[s[i]]<store[s[i+1]])
+            {
+                ans-=store[s[i]];
+            }
+            else
+            {
+                ans+=store[s[i]];   
+            }
+        }
+        return ans;
+    }
+};
