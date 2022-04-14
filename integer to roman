@@ -1,0 +1,40 @@
+Problem link: https://leetcode.com/problems/integer-to-roman/
+
+
+class Solution {
+public:
+    string intToRoman(int num) {
+        vector<int> rem(13);
+        vector<string> rom(13);
+        rem[0]=1000; rom[0]="M";
+        rem[1]=900; rom[1]="CM";
+        rem[2]=500; rom[2]="D";
+        rem[3]=400; rom[3]="CD";
+        rem[4]=100; rom[4]="C";
+        rem[5]=90;  rom[5]= "XC";
+        rem[6]=50;  rom[6]="L";
+        rem[7]=40;  rom[7]="XL";
+        rem[8]=10;  rom[8]="X";
+        rem[9]=9;   rom[9]="IX";
+        rem[10]=5;   rom[10]="V";
+        rem[11]=4;   rom[11]="IV";
+        rem[12]=1;   rom[12]="I";
+        string ans="";
+        
+        int ind=0;
+        while(num)
+        {
+            for(int i=ind;i<13;i++)
+            {
+                if(rem[i]<=num)
+                {
+                    ans+=rom[i];
+                    ind=i;
+                    break;
+                }
+            }
+            num=num-rem[ind];
+        }
+        return ans;
+    }
+};
