@@ -1,0 +1,47 @@
+Problem link: https://www.interviewbit.com/problems/matrix-median/
+
+
+
+int findcountlessthanequalto(int x, vector<vector<int> > &A)
+{
+    int ans=0;
+    for(auto curr:A)
+    {
+        int n=curr.size();
+        int low=0;
+        int high=n-1;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(curr[mid]>x)
+            {
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        ans+=low;
+    }
+    return ans;
+}
+
+int Solution::findMedian(vector<vector<int> > &A) {
+    int low=1,size=(A.size()*A[0].size());
+    int high=pow(10,9);
+    while(low<=high)
+    {
+        int mid=(low+high)/2;
+        if(findcountlessthanequalto(mid,A) > size/2)
+        {
+            high=mid-1;
+        }
+        else
+        {
+            low=mid+1;
+        }
+    }
+    return low;
+}
+
