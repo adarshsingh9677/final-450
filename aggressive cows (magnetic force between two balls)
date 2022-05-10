@@ -1,0 +1,42 @@
+Problem link: https://leetcode.com/problems/magnetic-force-between-two-balls/
+
+
+
+class Solution {
+public:
+    bool ispossible(int gap, vector<int>& position, int m)
+    {
+        int n=position.size();
+        int last_pos = position[0], cows_placed =1;
+        for(int i=1;i<n;i++)
+        {
+            if(position[i] - last_pos >= gap)
+            {
+                cows_placed++;
+                last_pos=position[i];
+            }
+            if(cows_placed==m)
+                return true;
+        }
+        return false;
+    }
+    int maxDistance(vector<int>& position, int m) {
+        sort(position.begin(),position.end());
+        int low=1,high=position[position.size()-1]-position[0],ans=0;
+        while(low<=high)
+        {
+            cout<<low<<" "<<high;
+            int mid=(low+high) >> 1;
+            if( ispossible(mid,position,m) )
+            {
+                ans=mid;
+                low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
+            }
+        }
+        return ans;
+    }
+};
