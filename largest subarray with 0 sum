@@ -1,0 +1,26 @@
+Problem link: https://practice.geeksforgeeks.org/problems/largest-subarray-with-0-sum/1#
+
+
+class Solution{
+    public:
+    int maxLen(vector<int>&A, int n)
+    {   
+        unordered_map<int,int> mmp;
+        int maxi=0,cur_sum=0;
+        for(int i=0;i<n;i++)
+        {
+            cur_sum+=A[i];
+            if(cur_sum==0)
+                maxi=i+1;
+            if(mmp.find(cur_sum)!=mmp.end())
+            {
+                maxi=max(maxi,i-mmp[cur_sum]);
+            }
+            if(mmp.find(cur_sum)==mmp.end())
+            {
+                mmp[cur_sum]=i;
+            }
+        }
+        return maxi;
+    }
+};
