@@ -1,0 +1,23 @@
+Problem link: https://www.interviewbit.com/problems/subarray-with-given-xor/
+
+
+
+int Solution::solve(vector<int> &A, int B) {
+    int n=A.size(),cnt=0;
+    unordered_map<int,int> mmp;
+    int cur_xor=0;
+    for(int i=0;i<n;i++)
+    {
+        cur_xor^=A[i];
+        if(cur_xor==B)
+        {
+            cnt++;
+        }
+        if(mmp.find(cur_xor^B)!=mmp.end())
+        {
+            cnt+=mmp[cur_xor^B];
+        }
+        mmp[cur_xor]+=1;
+    }
+    return cnt;
+}
