@@ -1,0 +1,31 @@
+Problem link: https://leetcode.com/problems/merge-intervals/
+
+
+
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector<vector<int>> ans;
+        int n=intervals.size();
+        sort(intervals.begin(),intervals.end());
+        vector<int> cur = intervals[0];
+        int cur_start = cur[0];
+        int cur_end = cur[1];
+        cout<<cur_start<<cur_end;
+        for(int i=1;i<n;i++)
+        {
+            if(intervals[i][0]<=cur_end)
+            {
+                cur_end = max(intervals[i][1],cur_end);
+            }
+            else
+            {
+                ans.push_back({cur_start,cur_end});
+                cur_start=intervals[i][0];
+                cur_end=intervals[i][1];
+            }
+        }
+        ans.push_back({cur_start,cur_end});
+        return ans;
+    }
+};
